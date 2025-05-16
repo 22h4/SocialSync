@@ -4,12 +4,10 @@ import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Logo from '@/components/Logo';
+import { useSession } from 'next-auth/react';
 
-interface HeaderNavProps {
-  session: any;
-}
-
-export default function HeaderNav({ session }: HeaderNavProps) {
+export default function HeaderNav() {
+  const { data: session } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 

@@ -1,9 +1,8 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
 import { getServerSession } from 'next-auth';
-import SessionProvider from '@/components/SessionProvider';
-import { ThemeProvider } from '@/components/ThemeProvider';
 import { Metadata } from 'next';
+import Providers from '@/components/Providers';
 import HeaderNav from '@/components/HeaderNav';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -26,14 +25,12 @@ export default async function RootLayout({
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <SessionProvider session={session}>
-          <ThemeProvider>
-            <div className="min-h-screen bg-gray-900">
-              <HeaderNav session={session} />
-              {children}
-            </div>
-          </ThemeProvider>
-        </SessionProvider>
+        <Providers session={session}>
+          <div className="min-h-screen bg-gray-900">
+            <HeaderNav />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );

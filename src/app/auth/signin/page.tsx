@@ -24,7 +24,7 @@ export default function SignIn() {
         >
           <motion.div variants={fadeInUp} className="text-center mb-8">
             <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
-              Welcome to Post
+              Welcome to SocialSync
             </h1>
             <p className="text-gray-400">
               Sign in to start sharing your content

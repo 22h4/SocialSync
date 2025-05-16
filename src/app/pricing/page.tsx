@@ -13,7 +13,7 @@ const plans = [
     features: [
       'Connect up to 3 social media accounts',
       'Basic analytics dashboard',
-      'Schedule up to 30 posts per month',
+      'Schedule up to 30 pieces of content per month',
       'AI-powered content suggestions',
       'Email support',
       '5 GB media storage'
@@ -28,7 +28,7 @@ const plans = [
     features: [
       'Connect up to 10 social media accounts',
       'Advanced analytics and reporting',
-      'Unlimited post scheduling',
+      'Unlimited content scheduling',
       'AI content generation and optimization',
       'Priority email and chat support',
       '20 GB media storage',
@@ -45,7 +45,7 @@ const plans = [
     features: [
       'Unlimited social media accounts',
       'Enterprise-grade analytics',
-      'Unlimited post scheduling',
+      'Unlimited content scheduling',
       'Advanced AI features and automation',
       '24/7 priority support',
       'Unlimited media storage',

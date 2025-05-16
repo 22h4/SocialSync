@@ -1,3 +1,5 @@
+"use client";
+
 import SocialMediaPost from '@/components/SocialMediaPost';
 
 export default function SocialMediaPage() {
