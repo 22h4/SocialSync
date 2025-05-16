@@ -1,0 +1,355 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Z-index hierarchy */
+:root {
+  --z-background: -10;
+  --z-backdrop: -5;
+  --z-content: 0;
+  --z-header: 30;
+  --z-navigation: 40;
+  --z-dropdown: 50;
+  --z-modal: 60;
+  --z-tooltip: 70;
+  --z-overlay: 80;
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card-background: 240 10% 3.9%;
+    --card-border: 240 3.7% 15.9%;
+    --card-foreground: 0 0% 98%;
+    --popover-background: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-800;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full transition-colors;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Glass effect */
+.glass {
+  @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-white/20 dark:border-gray-800/20 shadow-lg;
+  z-index: var(--z-content);
+}
+
+.dark .glass {
+  @apply bg-gray-900/80 border-gray-800/20;
+}
+
+/* Card styles */
+.card {
+  @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-sm;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover {
+  @apply shadow-lg border-gray-300/50 dark:border-gray-600/50 transform;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Button hover effect */
+.hover-lift {
+  @apply transition-all duration-300;
+  transform: translateY(0);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
+}
+
+/* Text gradient */
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600;
+  background-size: 200% auto;
+  animation: gradient 8s linear infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* Dropdown menus */
+.dropdown-menu {
+  z-index: var(--z-dropdown);
+  @apply bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 shadow-xl;
+  animation: dropIn 0.2s ease-out;
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Navigation */
+.navigation-layer {
+  z-index: var(--z-navigation);
+  @apply bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200/50 dark:border-gray-800/50;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Modal overlays */
+.modal-overlay {
+  z-index: var(--z-modal);
+  @apply bg-black/50 backdrop-blur-sm;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Tooltips */
+.tooltip {
+  z-index: var(--z-tooltip);
+  @apply bg-gray-900/90 text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-xl;
+  animation: tooltipIn 0.2s ease-out;
+}
+
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Focus styles */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading states */
+.loading {
+  @apply animate-pulse bg-gray-200 dark:bg-gray-700;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Grid patterns */
+.grid-pattern {
+  background-image: 
+    radial-gradient(circle at center, rgba(var(--bento-accent-1), 0.1) 0%, transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+  background-position: center, center, center;
+}
+
+.dark .grid-pattern {
+  background-image: 
+    radial-gradient(circle at center, rgba(var(--bento-accent-1), 0.2) 0%, transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Bento grid styles */
+.bento-background {
+  @apply fixed inset-0;
+  background: radial-gradient(circle at center, rgba(var(--bento-accent-1), 0.2) 0%, transparent 70%);
+  z-index: var(--z-background);
+}
+
+.bento-grid {
+  @apply fixed inset-0;
+  background-image: 
+    linear-gradient(rgba(var(--bento-accent-1), 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--bento-accent-1), 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: var(--z-backdrop);
+}
+
+.bento-blur {
+  @apply fixed inset-0;
+  backdrop-filter: blur(100px);
+  z-index: var(--z-backdrop);
+}
+
+/* Glass card styles */
+.glass-card {
+  @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-xl shadow-lg;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  @apply shadow-xl border-gray-300/50 dark:border-gray-600/50;
+  transform: translateY(-2px);
+}
+
+/* Interactive elements */
+.interactive {
+  @apply transition-all duration-200 ease-in-out cursor-pointer;
+}
+
+.interactive:hover {
+  @apply transform -translate-y-0.5;
+}
+
+.interactive:active {
+  @apply transform translate-y-0;
+}
+
+/* Status indicators */
+.status-dot {
+  @apply w-2 h-2 rounded-full;
+}
+
+.status-dot.online {
+  @apply bg-green-500;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.status-dot.offline {
+  @apply bg-red-500;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+/* Custom selection */
+::selection {
+  @apply bg-purple-500/20 text-purple-900 dark:text-purple-100;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --bento-gradient-1: 255, 255, 255;
+  --bento-gradient-2: 245, 245, 245;
+  --bento-accent-1: 59, 130, 246;
+  --bento-accent-2: 99, 102, 241;
+  --bento-accent-3: 139, 92, 246;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+    --bento-gradient-1: 31, 41, 55;
+    --bento-gradient-2: 17, 24, 39;
+    --bento-accent-1: 96, 165, 250;
+    --bento-accent-2: 129, 140, 248;
+    --bento-accent-3: 167, 139, 250;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.floating {
+  animation: float 8s ease-in-out infinite;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.floating:hover {
+  opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .glass-card {
+    background: rgba(var(--bento-gradient-1), 0.7);
+    border: 1px solid rgba(var(--bento-accent-1), 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0) }
+  10% { transform: translate(-5%, -10%) }
+  20% { transform: translate(-15%, 5%) }
+  30% { transform: translate(7%, -25%) }
+  40% { transform: translate(-5%, 25%) }
+  50% { transform: translate(-15%, 10%) }
+  60% { transform: translate(15%, 0%) }
+  70% { transform: translate(0%, 15%) }
+  80% { transform: translate(3%, 35%) }
+  90% { transform: translate(-10%, 10%) }
+}
+
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+} 
