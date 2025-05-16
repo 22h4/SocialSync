@@ -124,7 +124,7 @@ export default function Home() {
                 variants={fadeInUp}
                 className="text-7xl md:text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-8 animate-gradient"
               >
-                Post
+                SocialSync
               </motion.h1>
             </motion.div>
 

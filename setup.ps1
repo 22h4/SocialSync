@@ -9,7 +9,7 @@ New-Item -ItemType Directory -Force -Path "temp"
 
 # Install dependencies
 Write-Host "Installing dependencies..."
-npm install
+npm install re2 @prisma/client
 
 # Create .env file if it doesn't exist
 if (-not (Test-Path ".env")) {
